@@ -1,0 +1,24 @@
+class Solution {
+    public int singleElement(int[] arr) {
+        int low = 0, high = arr.length-1;
+        if(arr.length==1)
+            return arr[0];
+        if(arr[low]!=arr[low+1])
+            return arr[low];
+        else if(arr[high]!=arr[high-1])
+            return arr[high];
+        while(low<=high){
+            int mid = low + (high-low)/2;
+            if(mid>0 && mid<arr.length-1 && arr[mid]!=arr[mid-1] && arr[mid]!=arr[mid+1])
+                return arr[mid];
+            if(mid%2==0 && mid<high && arr[mid]==arr[mid+1] || (mid%2==1 && arr[mid]==arr[mid-1]))
+                low = mid + 1;
+            else
+                high = mid-1;
+        }
+        return -1;
+    }
+    public int singleNonDuplicate(int[] nums) {
+        return singleElement(nums);
+    }
+}
